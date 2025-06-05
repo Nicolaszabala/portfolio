@@ -75,10 +75,10 @@ export default function ProjectsSection() {
               key={filter.id}
               onClick={() => setActiveFilter(filter.id)}
               variant={activeFilter === filter.id ? "default" : "outline"}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-200 hover:scale-105 ${
+              className={`px-8 py-3 rounded-full font-bold transition-all duration-200 hover:scale-105 ${
                 activeFilter === filter.id
-                  ? "bg-primary text-white"
-                  : "bg-white text-gray-700 hover:bg-gray-100"
+                  ? "bg-primary text-primary-foreground neon-glow shadow-lg"
+                  : "glass-effect text-foreground hover:bg-primary/10 hover:border-primary/50"
               }`}
             >
               {filter.label}
@@ -95,44 +95,43 @@ export default function ProjectsSection() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
             >
-              <Card className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+              <Card className="bg-card dark:bg-card rounded-2xl overflow-hidden border-border hover:border-primary/30 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group neon-glow">
                 <div className="relative overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute top-4 right-4 flex space-x-2">
+                    <motion.a
+                      href={project.github}
+                      whileHover={{ scale: 1.1 }}
+                      className="glass-effect p-2 rounded-full text-white hover:text-primary transition-colors"
+                    >
+                      <Github size={18} />
+                    </motion.a>
+                    <motion.a
+                      href={project.demo}
+                      whileHover={{ scale: 1.1 }}
+                      className="glass-effect p-2 rounded-full text-white hover:text-primary transition-colors"
+                    >
+                      <ExternalLink size={18} />
+                    </motion.a>
+                  </div>
                 </div>
                 <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-xl font-semibold text-secondary">
-                      {project.title}
-                    </h3>
-                    <div className="flex space-x-2">
-                      <a
-                        href={project.github}
-                        className="text-gray-600 hover:text-primary transition-colors"
-                      >
-                        <Github size={18} />
-                      </a>
-                      <a
-                        href={project.demo}
-                        className="text-gray-600 hover:text-primary transition-colors"
-                      >
-                        <ExternalLink size={18} />
-                      </a>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className={`px-3 py-1 text-xs rounded-full font-medium ${getTechColor(
-                          tech
-                        )}`}
+                        className="px-3 py-1 text-xs rounded-full font-bold bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-primary-foreground transition-colors"
                       >
                         {tech}
                       </span>

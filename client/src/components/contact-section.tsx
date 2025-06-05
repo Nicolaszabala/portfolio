@@ -93,7 +93,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" ref={ref} className="py-20 bg-slate-50">
+    <section id="contact" ref={ref} className="py-20 bg-muted/30 dark:bg-muted/30">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -101,10 +101,10 @@ export default function ContactSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
+          <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4">
             Let's Work Together
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
             Ready to bring your ideas to life? Let's discuss your next project
           </p>
         </motion.div>
@@ -118,10 +118,11 @@ export default function ContactSection() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-semibold text-secondary mb-6">
-                Get In Touch
+              <h3 className="text-3xl font-bold text-foreground mb-6 flex items-center space-x-2">
+                <Mail className="text-primary h-8 w-8" />
+                <span>Get In Touch</span>
               </h3>
-              <p className="text-gray-600 leading-relaxed mb-8">
+              <p className="text-foreground/80 leading-relaxed mb-8 text-lg">
                 I'm always interested in new opportunities and exciting projects.
                 Whether you have a question or just want to say hi, I'll try my
                 best to get back to you!
@@ -137,16 +138,16 @@ export default function ContactSection() {
                     isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
                   }
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  className="flex items-center space-x-4"
+                  className="flex items-center space-x-4 p-4 rounded-xl glass-effect hover:border-primary/30 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
+                  <div className="w-14 h-14 bg-primary/20 rounded-xl flex items-center justify-center neon-glow">
                     {item.icon}
                   </div>
                   <div>
-                    <div className="font-semibold text-gray-700">
+                    <div className="font-bold text-foreground text-lg">
                       {item.label}
                     </div>
-                    <div className="text-gray-600">{item.value}</div>
+                    <div className="text-muted-foreground font-medium">{item.value}</div>
                   </div>
                 </motion.div>
               ))}
@@ -159,24 +160,27 @@ export default function ContactSection() {
               className="pt-6"
             >
               <div className="flex space-x-4">
-                <a
+                <motion.a
                   href={SOCIAL_LINKS.linkedin}
-                  className="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center hover:bg-blue-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-14 h-14 bg-primary text-primary-foreground rounded-xl flex items-center justify-center hover:bg-primary/90 transition-colors duration-200 neon-glow"
                 >
-                  <FaLinkedin size={20} />
-                </a>
-                <a
+                  <FaLinkedin size={24} />
+                </motion.a>
+                <motion.a
                   href={SOCIAL_LINKS.github}
-                  className="w-12 h-12 bg-gray-800 text-white rounded-xl flex items-center justify-center hover:bg-gray-700 transition-colors duration-200"
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  className="w-14 h-14 bg-foreground text-background rounded-xl flex items-center justify-center hover:bg-foreground/90 transition-colors duration-200 neon-glow"
                 >
-                  <FaGithub size={20} />
-                </a>
-                <a
+                  <FaGithub size={24} />
+                </motion.a>
+                <motion.a
                   href={SOCIAL_LINKS.twitter}
-                  className="w-12 h-12 bg-blue-500 text-white rounded-xl flex items-center justify-center hover:bg-blue-600 transition-colors duration-200"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-14 h-14 bg-accent text-accent-foreground rounded-xl flex items-center justify-center hover:bg-accent/90 transition-colors duration-200 neon-glow"
                 >
-                  <FaTwitter size={20} />
-                </a>
+                  <FaTwitter size={24} />
+                </motion.a>
               </div>
             </motion.div>
           </motion.div>
@@ -187,7 +191,7 @@ export default function ContactSection() {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <Card className="bg-white p-8 rounded-2xl shadow-lg">
+            <Card className="glass-effect p-8 rounded-2xl shadow-2xl border-border hover:border-primary/30 transition-all duration-300 neon-glow">
               <CardContent className="p-0">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -197,13 +201,13 @@ export default function ContactSection() {
                         name="firstName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-sm font-semibold text-gray-700">
+                            <FormLabel className="text-sm font-bold text-foreground">
                               First Name
                             </FormLabel>
                             <FormControl>
                               <Input
                                 placeholder="John"
-                                className="border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                                className="bg-background/50 border-border focus:ring-2 focus:ring-primary/50 focus:border-primary text-foreground placeholder:text-muted-foreground"
                                 {...field}
                               />
                             </FormControl>
@@ -217,13 +221,13 @@ export default function ContactSection() {
                         name="lastName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-sm font-semibold text-gray-700">
+                            <FormLabel className="text-sm font-bold text-foreground">
                               Last Name
                             </FormLabel>
                             <FormControl>
                               <Input
                                 placeholder="Doe"
-                                className="border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                                className="bg-background/50 border-border focus:ring-2 focus:ring-primary/50 focus:border-primary text-foreground placeholder:text-muted-foreground"
                                 {...field}
                               />
                             </FormControl>
