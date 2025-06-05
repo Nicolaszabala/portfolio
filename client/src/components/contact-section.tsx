@@ -242,14 +242,14 @@ export default function ContactSection() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm font-semibold text-gray-700">
+                          <FormLabel className="text-sm font-bold text-foreground">
                             Email Address
                           </FormLabel>
                           <FormControl>
                             <Input
                               type="email"
                               placeholder="john@example.com"
-                              className="border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                              className="bg-background/50 border-border focus:ring-2 focus:ring-primary/50 focus:border-primary text-foreground placeholder:text-muted-foreground"
                               {...field}
                             />
                           </FormControl>
@@ -263,16 +263,16 @@ export default function ContactSection() {
                       name="projectType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm font-semibold text-gray-700">
+                          <FormLabel className="text-sm font-bold text-foreground">
                             Project Type
                           </FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
-                              <SelectTrigger className="border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                              <SelectTrigger className="bg-background/50 border-border focus:ring-2 focus:ring-primary/50 focus:border-primary text-foreground">
                                 <SelectValue placeholder="Select a project type" />
                               </SelectTrigger>
                             </FormControl>
-                            <SelectContent>
+                            <SelectContent className="glass-effect border-border">
                               <SelectItem value="web-development">Web Development</SelectItem>
                               <SelectItem value="mobile-app">Mobile App</SelectItem>
                               <SelectItem value="fullstack">Fullstack Application</SelectItem>
@@ -290,16 +290,16 @@ export default function ContactSection() {
                       name="budget"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm font-semibold text-gray-700">
+                          <FormLabel className="text-sm font-bold text-foreground">
                             Project Budget
                           </FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
-                              <SelectTrigger className="border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                              <SelectTrigger className="bg-background/50 border-border focus:ring-2 focus:ring-primary/50 focus:border-primary text-foreground">
                                 <SelectValue placeholder="Select budget range" />
                               </SelectTrigger>
                             </FormControl>
-                            <SelectContent>
+                            <SelectContent className="glass-effect border-border">
                               <SelectItem value="5k-10k">$5,000 - $10,000</SelectItem>
                               <SelectItem value="10k-25k">$10,000 - $25,000</SelectItem>
                               <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
@@ -316,14 +316,14 @@ export default function ContactSection() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-sm font-semibold text-gray-700">
+                          <FormLabel className="text-sm font-bold text-foreground">
                             Message
                           </FormLabel>
                           <FormControl>
                             <Textarea
                               rows={5}
                               placeholder="Tell me about your project..."
-                              className="border-gray-200 focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"
+                              className="bg-background/50 border-border focus:ring-2 focus:ring-primary/50 focus:border-primary resize-none text-foreground placeholder:text-muted-foreground"
                               {...field}
                             />
                           </FormControl>
@@ -335,7 +335,7 @@ export default function ContactSection() {
                     <Button
                       type="submit"
                       disabled={contactMutation.isPending}
-                      className="w-full bg-primary text-white py-4 px-6 rounded-xl font-semibold hover:bg-blue-700 transition-all duration-200 hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-primary text-primary-foreground py-4 px-6 rounded-xl font-bold hover:bg-primary/90 transition-all duration-200 hover:scale-[1.02] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed neon-glow"
                     >
                       {contactMutation.isPending ? (
                         <span className="flex items-center justify-center space-x-2">

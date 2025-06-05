@@ -14,45 +14,45 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-secondary text-white py-12">
+    <footer className="bg-muted/50 dark:bg-background border-t border-border py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <h3 className="text-xl font-bold gradient-text">
+            <h3 className="text-xl font-black gradient-text">
               {DEVELOPER_INFO.name}
             </h3>
-            <p className="text-gray-300">
+            <p className="text-muted-foreground font-medium">
               {DEVELOPER_INFO.title} crafting exceptional digital experiences with modern technologies.
             </p>
             <div className="flex space-x-4">
               <a
                 href={SOCIAL_LINKS.github}
-                className="text-gray-300 hover:text-white transition-colors duration-200"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200 p-2 rounded-lg hover:bg-primary/10"
               >
-                <FaGithub size={20} />
+                <FaGithub size={24} />
               </a>
               <a
                 href={SOCIAL_LINKS.linkedin}
-                className="text-gray-300 hover:text-white transition-colors duration-200"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200 p-2 rounded-lg hover:bg-primary/10"
               >
-                <FaLinkedin size={20} />
+                <FaLinkedin size={24} />
               </a>
               <a
                 href={SOCIAL_LINKS.twitter}
-                className="text-gray-300 hover:text-white transition-colors duration-200"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200 p-2 rounded-lg hover:bg-primary/10"
               >
-                <FaTwitter size={20} />
+                <FaTwitter size={24} />
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold mb-4 text-foreground">Quick Links</h4>
+            <ul className="space-y-3">
               <li>
                 <button
                   onClick={() => scrollToSection("about")}
-                  className="text-gray-300 hover:text-white transition-colors duration-200"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
                 >
                   About
                 </button>
@@ -60,7 +60,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => scrollToSection("projects")}
-                  className="text-gray-300 hover:text-white transition-colors duration-200"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
                 >
                   Projects
                 </button>
@@ -68,7 +68,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => scrollToSection("skills")}
-                  className="text-gray-300 hover:text-white transition-colors duration-200"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
                 >
                   Skills
                 </button>
@@ -76,7 +76,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={() => scrollToSection("contact")}
-                  className="text-gray-300 hover:text-white transition-colors duration-200"
+                  className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium"
                 >
                   Contact
                 </button>
@@ -85,28 +85,28 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Services</h4>
-            <ul className="space-y-2">
-              <li><span className="text-gray-300">Web Development</span></li>
-              <li><span className="text-gray-300">Mobile Apps</span></li>
-              <li><span className="text-gray-300">UI/UX Design</span></li>
-              <li><span className="text-gray-300">Consultation</span></li>
+            <h4 className="font-bold mb-4 text-foreground">Services</h4>
+            <ul className="space-y-3">
+              <li><span className="text-muted-foreground font-medium">Web Development</span></li>
+              <li><span className="text-muted-foreground font-medium">Mobile Apps</span></li>
+              <li><span className="text-muted-foreground font-medium">UI/UX Design</span></li>
+              <li><span className="text-muted-foreground font-medium">Consultation</span></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Contact Info</h4>
-            <ul className="space-y-2">
-              <li className="text-gray-300">{DEVELOPER_INFO.email}</li>
-              <li className="text-gray-300">{DEVELOPER_INFO.phone}</li>
-              <li className="text-gray-300">{DEVELOPER_INFO.location}</li>
+            <h4 className="font-bold mb-4 text-foreground">Contact Info</h4>
+            <ul className="space-y-3">
+              <li className="text-muted-foreground font-medium">{DEVELOPER_INFO.email}</li>
+              <li className="text-muted-foreground font-medium">{DEVELOPER_INFO.phone}</li>
+              <li className="text-muted-foreground font-medium">{DEVELOPER_INFO.location}</li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-          <p className="text-gray-300">
-            © 2024 {DEVELOPER_INFO.name}. All rights reserved. Built with ❤️ and modern web technologies.
+        <div className="border-t border-border mt-8 pt-8 text-center">
+          <p className="text-muted-foreground font-medium">
+            © 2024 {DEVELOPER_INFO.name}. All rights reserved. Built with modern web technologies.
           </p>
         </div>
       </div>
