@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Zap } from "lucide-react";
 import { motion } from "framer-motion";
+import { ModeToggle } from "@/components/mode-toggle";
 import { DEVELOPER_INFO } from "@/lib/constants";
 
 export default function Navigation() {
@@ -41,40 +42,46 @@ export default function Navigation() {
       animate={{ y: 0 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-lg"
-          : "bg-white/80 backdrop-blur-md border-b border-gray-200/50"
+          ? "glass-effect border-b border-border/50 shadow-2xl"
+          : "glass-effect border-b border-border/30"
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <span className="text-2xl font-bold gradient-text">
-              {DEVELOPER_INFO.name}
-            </span>
-          </div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-8">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="text-gray-700 hover:text-primary transition-colors duration-200 font-medium"
-                >
-                  {item.label}
-                </button>
-              ))}
+            <div className="flex items-center space-x-2">
+              <Zap className="text-primary h-6 w-6" />
+              <span className="text-2xl font-bold gradient-text">
+                {DEVELOPER_INFO.name}
+              </span>
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-gray-700 hover:text-primary"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-foreground/80 hover:text-primary transition-all duration-200 font-medium relative group"
+              >
+                {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-200 group-hover:w-full"></span>
+              </button>
+            ))}
+            <ModeToggle />
+          </div>
+
+          {/* Mobile Menu Button and Theme Toggle */}
+          <div className="md:hidden flex items-center space-x-2">
+            <ModeToggle />
+            <button
+              className="text-foreground/80 hover:text-primary"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -83,14 +90,14 @@ export default function Navigation() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden py-4 border-t border-gray-200/50"
+            className="md:hidden py-4 border-t border-border/50"
           >
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-gray-700 hover:text-primary transition-colors duration-200 font-medium text-left"
+                  className="text-foreground/80 hover:text-primary transition-colors duration-200 font-medium text-left"
                 >
                   {item.label}
                 </button>

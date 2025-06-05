@@ -1,14 +1,25 @@
 import { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
+import { Sparkles, Code, Zap, Trophy } from "lucide-react";
 import { DEVELOPER_INFO, STATS } from "@/lib/constants";
 
 export default function AboutSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const getStatIcon = (key: string) => {
+    const icons = {
+      projects: <Code className="text-primary h-6 w-6" />,
+      experience: <Zap className="text-accent h-6 w-6" />,
+      clients: <Trophy className="text-primary h-6 w-6" />,
+      technologies: <Sparkles className="text-accent h-6 w-6" />,
+    };
+    return icons[key as keyof typeof icons];
+  };
+
   return (
-    <section id="about" ref={ref} className="py-20 bg-white">
+    <section id="about" ref={ref} className="py-20 bg-background dark:bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -16,10 +27,10 @@ export default function AboutSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
+          <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4">
             About Me
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
             Get to know the person behind the code
           </p>
         </motion.div>
@@ -29,16 +40,17 @@ export default function AboutSection() {
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-6"
+            className="space-y-8"
           >
-            <div className="space-y-4">
-              <h3 className="text-2xl font-semibold text-secondary">
-                My Journey
+            <div className="space-y-6">
+              <h3 className="text-3xl font-bold text-foreground flex items-center space-x-2">
+                <Sparkles className="text-primary h-8 w-8" />
+                <span>My Journey</span>
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-foreground/80 leading-relaxed text-lg">
                 {DEVELOPER_INFO.story}
               </p>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-foreground/80 leading-relaxed text-lg">
                 I believe in continuous learning and staying at the forefront of
                 technology trends. When I'm not coding, you'll find me
                 contributing to open source projects, mentoring junior
@@ -56,12 +68,15 @@ export default function AboutSection() {
                   }
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                 >
-                  <Card className="text-center p-4 bg-slate-50 hover:shadow-md transition-shadow duration-200">
+                  <Card className="text-center p-6 bg-card dark:bg-card border-border hover:shadow-xl hover:border-primary/30 transition-all duration-300 group neon-glow">
                     <CardContent className="p-0">
-                      <div className="text-3xl font-bold text-primary">
+                      <div className="flex justify-center mb-3">
+                        {getStatIcon(key)}
+                      </div>
+                      <div className="text-4xl font-black text-foreground mb-2 group-hover:text-primary transition-colors">
                         {value}
                       </div>
-                      <div className="text-gray-600 font-medium capitalize">
+                      <div className="text-muted-foreground font-semibold text-sm capitalize">
                         {key === "experience"
                           ? "Years Experience"
                           : key === "clients"
@@ -84,19 +99,29 @@ export default function AboutSection() {
             className="relative"
           >
             <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
               <img
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=800"
                 alt="Professional developer portrait"
-                className="rounded-2xl shadow-2xl w-full h-auto transition-transform duration-300 group-hover:scale-[1.02]"
+                className="relative rounded-2xl shadow-2xl w-full h-auto transition-transform duration-300 group-hover:scale-[1.02] border-2 border-border"
               />
-              <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-xl shadow-lg">
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-sm font-medium text-gray-700">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+                className="absolute -bottom-6 -right-6 glass-effect p-4 rounded-xl shadow-xl border border-primary/30"
+              >
+                <div className="flex items-center space-x-3">
+                  <motion.div 
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="w-4 h-4 bg-accent rounded-full"
+                  ></motion.div>
+                  <span className="text-sm font-bold text-foreground">
                     Available for projects
                   </span>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>

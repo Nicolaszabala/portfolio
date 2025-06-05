@@ -47,7 +47,7 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section id="projects" ref={ref} className="py-20 bg-slate-50">
+    <section id="projects" ref={ref} className="py-20 bg-muted/30 dark:bg-muted/30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -55,10 +55,10 @@ export default function ProjectsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-4">
+          <h2 className="text-4xl md:text-6xl font-black text-foreground mb-4">
             Featured Projects
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-medium">
             A showcase of my recent work and technical expertise
           </p>
         </motion.div>
