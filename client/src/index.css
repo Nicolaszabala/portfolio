@@ -68,10 +68,10 @@
   }
 
   .glass-effect {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(240, 238, 238, 0.05);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(139, 92, 246, 0.3);
-    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(73, 4, 235, 0.3);
+    box-shadow: 0 8px 32px rgba(79, 10, 240, 0.1);
   }
 
   .dark .glass-effect {
@@ -92,7 +92,7 @@
   }
 
   .discord-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg,#4accff 0%, #ffffff 100%);
   }
 
   .dark .discord-bg {
@@ -100,7 +100,7 @@
   }
 
   .neon-glow {
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.1);
+    box-shadow: 0 0 20px rgba(254, 253, 255, 0.3), 0 0 40px rgba(72, 1, 238, 0.1);
   }
 
   .dark .neon-glow {
