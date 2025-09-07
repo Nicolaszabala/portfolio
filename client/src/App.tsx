@@ -20,8 +20,10 @@ function App() {
     <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <Toaster />
-          <Router />
+          <div className="overflow-x-hidden">
+            <Router />
+            <Toaster />
+          </div>
         </TooltipProvider>
       </QueryClientProvider>
     </ThemeProvider>
