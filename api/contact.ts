@@ -1,12 +1,10 @@
 // api/contact.ts - Archivo para Vercel Functions
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
-import { Pool, neonConfig } from '@neondatabase/serverless';
+import { Pool } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 import { pgTable, text, serial } from 'drizzle-orm/pg-core';
 import { createInsertSchema } from 'drizzle-zod';
-import { eq } from 'drizzle-orm';
-import ws from 'ws';
 
 // Schema definitions
 const contacts = pgTable('contacts', {
@@ -28,19 +26,20 @@ const insertContactSchema = createInsertSchema(contacts).pick({
   message: true,
 });
 
-// Database setup
-neonConfig.webSocketConstructor = ws;
-
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL must be set. Did you forget to provision a database?');
+// Database connection function
+function getDatabase() {
+  if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL must be set. Did you forget to provision a database?');
+  }
+  
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  return drizzle(pool);
 }
-
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const db = drizzle({ client: pool, schema: { contacts } });
 
 // Storage class
 class DatabaseStorage {
   async createContact(insertContact: any) {
+    const db = getDatabase();
     const [contact] = await db
       .insert(contacts)
       .values({
@@ -52,8 +51,6 @@ class DatabaseStorage {
     return contact;
   }
 }
-
-const storage = new DatabaseStorage();
 
 // Vercel Function Handler
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -79,6 +76,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const contactData = insertContactSchema.parse(req.body);
+    const storage = new DatabaseStorage();
     const contact = await storage.createContact(contactData);
     
     res.status(200).json({

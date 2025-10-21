@@ -101,7 +101,7 @@ export default function AboutSection() {
             <div className="relative group">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
               <img
-                src="nicoconexos.png"
+                src="/nicoconexos.png"
                 alt="Professional developer portrait"
                 className="relative rounded-2xl shadow-2xl w-full h-auto transition-transform duration-300 group-hover:scale-[1.02] border-2 border-border"
               />
