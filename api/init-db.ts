@@ -1,19 +1,6 @@
 // api/init-db.ts - Script para inicializar la base de datos
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { Pool } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import { pgTable, text, serial } from 'drizzle-orm/pg-core';
-
-// Schema definitions
-const contacts = pgTable('contacts', {
-  id: serial('id').primaryKey(),
-  firstName: text('first_name').notNull(),
-  lastName: text('last_name').notNull(),
-  email: text('email').notNull(),
-  projectType: text('project_type'),
-  budget: text('budget'),
-  message: text('message').notNull(),
-});
 
 // Database connection function
 function getDatabase() {
@@ -27,11 +14,16 @@ function getDatabase() {
     connectionString += '?sslmode=require';
   }
   
+  console.log('Connecting to database with SSL...');
   const pool = new Pool({ connectionString });
   return pool;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  console.log('Init-db function called');
+  console.log('Method:', req.method);
+  console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
+  
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -42,19 +34,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   );
 
   if (req.method === 'OPTIONS') {
+    console.log('Handling OPTIONS request');
     res.status(200).end();
     return;
   }
 
   if (req.method !== 'POST' && req.method !== 'GET') {
+    console.log('Method not allowed:', req.method);
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
 
   try {
+    console.log('Starting database initialization...');
     const pool = getDatabase();
+    console.log('Pool created successfully');
+    
     const client = await pool.connect();
+    console.log('Client connected successfully');
     
     try {
+      console.log('Creating contacts table...');
       // Crear la tabla contacts si no existe
       await client.query(`
         CREATE TABLE IF NOT EXISTS contacts (
@@ -76,10 +75,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         message: 'Database initialized successfully',
       });
     } finally {
+      console.log('Releasing client connection...');
       client.release();
     }
   } catch (error) {
     console.error('Database initialization error:', error);
+    console.error('Error details:', {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined
+    });
+    
     res.status(500).json({
       success: false,
       message: 'Failed to initialize database',
