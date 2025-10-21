@@ -19,7 +19,13 @@ function getDatabase() {
     throw new Error('DATABASE_URL must be set. Did you forget to provision a database?');
   }
   
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  // Asegurar que la conexión use SSL
+  let connectionString = process.env.DATABASE_URL;
+  if (!connectionString.includes('sslmode=')) {
+    connectionString += '?sslmode=require';
+  }
+  
+  const pool = new Pool({ connectionString });
   return pool;
 }
 
@@ -53,6 +59,10 @@ class DatabaseStorage {
 
 // Vercel Function Handler
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  console.log('Request method:', req.method);
+  console.log('Request URL:', req.url);
+  console.log('Request headers:', req.headers);
+  
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -64,13 +74,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // Handle preflight requests
   if (req.method === 'OPTIONS') {
+    console.log('Handling OPTIONS request');
     res.status(200).end();
     return;
   }
 
   // Only allow POST requests
   if (req.method !== 'POST') {
-    return res.status(405).json({ success: false, message: 'Method not allowed' });
+    console.log('Method not allowed:', req.method);
+    return res.status(405).json({ 
+      success: false, 
+      message: `Method ${req.method} not allowed. Only POST is supported.` 
+    });
   }
 
   try {

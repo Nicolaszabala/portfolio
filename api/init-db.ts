@@ -21,8 +21,14 @@ function getDatabase() {
     throw new Error('DATABASE_URL must be set. Did you forget to provision a database?');
   }
   
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  return drizzle(pool);
+  // Asegurar que la conexión use SSL
+  let connectionString = process.env.DATABASE_URL;
+  if (!connectionString.includes('sslmode=')) {
+    connectionString += '?sslmode=require';
+  }
+  
+  const pool = new Pool({ connectionString });
+  return pool;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
