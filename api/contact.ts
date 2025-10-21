@@ -79,12 +79,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  // Only allow POST requests
+  // Only allow POST requests for contact creation
   if (req.method !== 'POST') {
     console.log('Method not allowed:', req.method);
     return res.status(405).json({ 
       success: false, 
-      message: `Method ${req.method} not allowed. Only POST is supported.` 
+      message: `Method ${req.method} not allowed. Only POST is supported for contact creation.` 
     });
   }
 

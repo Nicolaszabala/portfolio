@@ -46,33 +46,38 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return;
   }
 
-  if (req.method !== 'POST') {
+  if (req.method !== 'POST' && req.method !== 'GET') {
     return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
 
   try {
-    const db = getDatabase();
+    const pool = getDatabase();
+    const client = await pool.connect();
     
-    // Crear la tabla contacts si no existe
-    await db.execute(`
-      CREATE TABLE IF NOT EXISTS contacts (
-        id SERIAL PRIMARY KEY,
-        first_name TEXT NOT NULL,
-        last_name TEXT NOT NULL,
-        email TEXT NOT NULL,
-        project_type TEXT,
-        budget TEXT,
-        message TEXT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      );
-    `);
-    
-    console.log('Table contacts created successfully');
-    
-    res.status(200).json({
-      success: true,
-      message: 'Database initialized successfully',
-    });
+    try {
+      // Crear la tabla contacts si no existe
+      await client.query(`
+        CREATE TABLE IF NOT EXISTS contacts (
+          id SERIAL PRIMARY KEY,
+          first_name TEXT NOT NULL,
+          last_name TEXT NOT NULL,
+          email TEXT NOT NULL,
+          project_type TEXT,
+          budget TEXT,
+          message TEXT NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+      `);
+      
+      console.log('Table contacts created successfully');
+      
+      res.status(200).json({
+        success: true,
+        message: 'Database initialized successfully',
+      });
+    } finally {
+      client.release();
+    }
   } catch (error) {
     console.error('Database initialization error:', error);
     res.status(500).json({
