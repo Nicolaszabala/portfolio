@@ -19,11 +19,15 @@ function getDatabase() {
     throw new Error('DATABASE_URL must be set. Did you forget to provision a database?');
   }
   
+  console.log('Original DATABASE_URL:', process.env.DATABASE_URL);
+  
   // Asegurar que la conexión use SSL
   let connectionString = process.env.DATABASE_URL;
   if (!connectionString.includes('sslmode=')) {
     connectionString += '?sslmode=require';
   }
+  
+  console.log('Final connection string:', connectionString);
   
   const pool = new Pool({ connectionString });
   return pool;
