@@ -2,28 +2,15 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
 import { Pool } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import { pgTable, text, serial } from 'drizzle-orm/pg-core';
-import { createInsertSchema } from 'drizzle-zod';
 
-// Schema definitions
-const contacts = pgTable('contacts', {
-  id: serial('id').primaryKey(),
-  firstName: text('first_name').notNull(),
-  lastName: text('last_name').notNull(),
-  email: text('email').notNull(),
-  projectType: text('project_type'),
-  budget: text('budget'),
-  message: text('message').notNull(),
-});
-
-const insertContactSchema = createInsertSchema(contacts).pick({
-  firstName: true,
-  lastName: true,
-  email: true,
-  projectType: true,
-  budget: true,
-  message: true,
+// Schema de validación simple
+const insertContactSchema = z.object({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  email: z.string().email("Please enter a valid email address"),
+  projectType: z.string().optional(),
+  budget: z.string().optional(),
+  message: z.string().min(10, "Message must be at least 10 characters long"),
 });
 
 // Database connection function
@@ -33,22 +20,34 @@ function getDatabase() {
   }
   
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  return drizzle(pool);
+  return pool;
 }
 
-// Storage class
+// Storage class usando SQL directo
 class DatabaseStorage {
   async createContact(insertContact: any) {
-    const db = getDatabase();
-    const [contact] = await db
-      .insert(contacts)
-      .values({
-        ...insertContact,
-        projectType: insertContact.projectType || null,
-        budget: insertContact.budget || null,
-      })
-      .returning();
-    return contact;
+    const pool = getDatabase();
+    const client = await pool.connect();
+    
+    try {
+      const result = await client.query(
+        `INSERT INTO contacts (first_name, last_name, email, project_type, budget, message, created_at) 
+         VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP) 
+         RETURNING id, first_name, last_name, email, project_type, budget, message, created_at`,
+        [
+          insertContact.firstName,
+          insertContact.lastName,
+          insertContact.email,
+          insertContact.projectType || null,
+          insertContact.budget || null,
+          insertContact.message
+        ]
+      );
+      
+      return result.rows[0];
+    } finally {
+      client.release();
+    }
   }
 }
 
@@ -75,9 +74,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    console.log('Received request body:', req.body);
+    console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
+    
     const contactData = insertContactSchema.parse(req.body);
+    console.log('Parsed contact data:', contactData);
+    
     const storage = new DatabaseStorage();
     const contact = await storage.createContact(contactData);
+    
+    console.log('Contact created successfully:', contact);
     
     res.status(200).json({
       success: true,
@@ -85,17 +91,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       contactId: contact.id,
     });
   } catch (error) {
+    console.error('Contact creation error:', error);
+    
     if (error instanceof z.ZodError) {
+      console.error('Validation errors:', error.errors);
       res.status(400).json({
         success: false,
         message: 'Invalid form data',
         errors: error.errors,
       });
     } else {
-      console.error('Contact creation error:', error);
+      console.error('Server error:', error);
       res.status(500).json({
         success: false,
         message: 'Something went wrong. Please try again.',
+        error: error instanceof Error ? error.message : 'Unknown error',
       });
     }
   }
