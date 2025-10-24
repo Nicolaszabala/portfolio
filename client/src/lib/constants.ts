@@ -42,7 +42,7 @@ export const PROJECTS = [
     description:"Web platform and e-commerce for high-end winery with intelligent automations. Full integration between WordPress, Zoho CRM, MercadoPago, and Zoho Books to optimize sales and operational management.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUY7VHfXcC_cFwahCtIuTe3Ed-3ckXqubACg&s",
   category: ["fullstack","CMS"],
-    technologies: ["Wordpress", "PHP", "MySQL", "Javascript", "Zapier", "Zoho CRM", "Shopify"], 
+    technologies: ["Wordpress", "PHP", "MySQL", "Javascript", "Zoho CRM", "Webhooks"], 
     demo: "http://pelleritipriore.com/",
   },
   {
@@ -58,7 +58,7 @@ export const PROJECTS = [
     id: 5,
     title: "Greenpeace Chile",
     description: "Comprehensive website development for Greenpeace Chile, featuring content management, campaign integration, and donation systems to support environmental activism.",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450",
+    image: "https://www.greenpeace.org/static/planet4-chile-stateless/2024/12/e7787808-ballena-jorobada-gp0stsjum-%C2%A9-paul-hilton-greenpeace-scaled.jpg",
     category: "fullstack",
     technologies: ["WordPress", "PHP", "MySQL", "JavaScript"],
     demo: "https://www.greenpeace.org/chile/",
@@ -80,17 +80,17 @@ export const SKILLS = {
     {
       name: "Frontend Development",
       level: 95,
-      technologies: ["React", "Vue.js", "Angular", "TypeScript"],
+      technologies: ["React", "Next.js", "Bootstrap", "Material UI", "Tailwind CSS", "TypeScript"],
     },
     {
       name: "Backend Development",
       level: 90,
-      technologies: ["Node.js", "Express", "Python", "Django"],
+      technologies: ["Node.js", "Express", "PHP", "Django"],
     },
     {
       name: "Database & Cloud",
       level: 85,
-      technologies: ["PostgreSQL", "MongoDB", "AWS", "Docker"],
+      technologies: ["PostgreSQL", "MySQL", "Prisma", "Azure", "Docker"],
     },
     {
       name: "Mobile Development",
@@ -102,12 +102,13 @@ export const SKILLS = {
     development: ["VS Code", "Git & GitHub", "Terminal", "Postman"],
     design: ["Figma", "Adobe XD", "Sketch", "Photoshop"],
     devops: ["Docker", "AWS", "Netlify", "Vercel"],
-    collaboration: ["Jira", "Slack", "Notion", "Zoom"],
+    collaboration: ["Jira", "Slack", "Notion", "Clickup"],
   },
   certifications: [
-    { name: "AWS Certified Developer", year: "2023" },
-    { name: "Google Cloud Professional", year: "2023" },
-    { name: "React Professional Certificate", year: "2022" },
+    { name: "Computer Science Degree - Universidad Siglo 21", year: "2024" },
+    { name: "Database Programing (.NET framework) - CIPSA Barcelona", year: "2023" },
+     { name: "Javascript Algorithms and Data Structures - Free CodeCamp", year: "2022" },
+    { name: "Professional Front-end Developer - Universidad Tecnológica Nacional", year: "2021" },
   ],
 };
 
