@@ -47,7 +47,7 @@ export const SOCIAL_LINKS = {
 ```typescript
 export const STATS = {
   projects: "50+",      // Number of projects
-  experience: "5+",     // Years of experience
+  experience: "6+",     // Years of experience
   clients: "25+",       // Number of clients
   technologies: "15+",  // Technologies you know
 };

@@ -53,8 +53,7 @@ export default function AboutSection() {
               <p className="text-foreground/80 leading-relaxed text-lg">
                 I believe in continuous learning and staying at the forefront of
                 technology trends. When I'm not coding, you'll find me
-                contributing to open source projects, mentoring junior
-                developers, or exploring the latest in AI and machine learning.
+                developing my own projects, reading books, or exploring the latest in AI and machine learning.
               </p>
             </div>
 
