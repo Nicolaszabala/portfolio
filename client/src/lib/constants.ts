@@ -39,7 +39,7 @@ export const PROJECTS = [
   {
     id: 3,
     title: "Pelleriti Priore",
-    description:"Web platform and e-commerce for high-end winery with intelligent automations. Full integration between WordPress, Zoho CRM, MercadoPago, and Zoho Books to optimize sales and operational management.",
+    description:"Web platform with e-commerce for high-end winery with intelligent automations. Full integration between WordPress, Zoho CRM, MercadoPago, and Zoho Books.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUY7VHfXcC_cFwahCtIuTe3Ed-3ckXqubACg&s",
   category: ["fullstack","CMS"],
     technologies: ["Wordpress", "PHP", "MySQL", "Javascript", "Zoho CRM", "Webhooks"], 
@@ -113,8 +113,8 @@ export const SKILLS = {
 };
 
 export const SOCIAL_LINKS = {
-  github: "https://github.com",
-  linkedin: "https://linkedin.com",
-  twitter: "https://twitter.com",
-  email: "mailto:alex.chen@example.com",
+  github: "https://github.com/Nicolaszabala",
+  linkedin: "https://www.linkedin.com/in/nicolas-zabala/",
+  
+  email: "mailto:nznicolaszabala@gmail.com",
 };
