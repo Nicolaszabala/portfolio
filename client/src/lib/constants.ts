@@ -67,7 +67,7 @@ export const PROJECTS = [
     id: 6,
     title: "Fundación IDA",
     description: "Digital archive platform for preserving and showcasing Argentine design heritage, featuring document management, virtual exhibitions, and research tools for historical and contemporary design collections.",
-    image: "https://cdn.https://cdn.myportfolio.com/a330b5f7-de5e-45c0-87bb-f69cb81f34bd/005e569c-cb34-45a4-819b-9e5cddb36a25_rw_1200.jpg?h=983b641cef7c075be3d3d52d8f5f58ad.com/a330b5f7-de5e-45c0-87bb-f69cb81f34bd/005e569c-cb34-45a4-819b-9e5cddb36a25_rw_1200.jpg?h=983b641cef7c075be3d3d52d8f5f58ad",
+    image: "https://modalia.cultura.gob.ar/wp-content/uploads/2022/09/Fundacion-IDA.jpg",
     category: "fullstack",
     technologies: ["Drupal", "PHP", "MySQL", "Apache Solr", "IIIF"],
     demo: "https://fundacionida.org/",
