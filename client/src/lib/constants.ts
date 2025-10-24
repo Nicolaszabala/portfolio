@@ -48,7 +48,7 @@ export const PROJECTS = [
   {
     id: 4,
     title: "Penedo Borges",
-    description: "E-commerce platform for premium winery with custom Liquid code, integrated with HubSpot for customer relationship management and Zoho Campaigns for marketing automation.",
+    description: "E-commerce platform for premium winery with custom Liquid code, integrated with HubSpot and Zoho Campaigns for full automation.",
     image: "https://www.greatwinecapitals.com/wp-content/uploads/2024/10/Penedo-Borges-scaled.jpg",
     category: ["Frontend","CMS"],
     technologies: ["Shopify", "Liquid", "HubSpot","Javascript", "CSS", "Zoho Campaigns"],
@@ -57,22 +57,49 @@ export const PROJECTS = [
   {
     id: 5,
     title: "Greenpeace Chile",
-    description: "Comprehensive website development for Greenpeace Chile, featuring content management, campaign integration, and donation systems to support environmental activism.",
+    description: "Comprehensive website development for Greenpeace Chile, featuring content management, campaign integration, and donation systems.",
     image: "https://www.greenpeace.org/static/planet4-chile-stateless/2024/12/e7787808-ballena-jorobada-gp0stsjum-%C2%A9-paul-hilton-greenpeace-scaled.jpg",
     category: "fullstack",
     technologies: ["WordPress", "PHP", "MySQL", "JavaScript"],
     demo: "https://www.greenpeace.org/chile/",
   },
-  {
-    id: 6,
-    title: "Fundación IDA",
-    description: "Digital archive platform for preserving and showcasing Argentine design heritage, featuring document management, virtual exhibitions, and research tools for historical and contemporary design collections.",
-    image: "https://modalia.cultura.gob.ar/wp-content/uploads/2022/09/Fundacion-IDA.jpg",
-    category: "fullstack",
-    technologies: ["Drupal", "PHP", "MySQL", "Apache Solr", "IIIF"],
-    demo: "https://fundacionida.org/",
-  },
+{
+  id: 6,
+  title: "Verssalo",
+  description: "WordPress platform with API integration to translation software suite for multilingual content management and workflow automation.",
+  image: "https://elia-association.org/wp-content/uploads/2023/01/Verssalo-logo-1024x683.png",
+  category: "fullstack",
+  technologies: ["WordPress", "PHP", "REST API", "MySQL", "Translation Management"],
+  demo: "https://verssalo.com/",
+},
+{
+  id: 7,
+  title: "MoviGo",
+  description: "Mobile carpooling application connecting drivers and passengers for shared rides, featuring real-time matching, route optimization, and secure payment integration.",
+  image: "https://movigo.app/static/media/MoviGo12.32810e3a9c0ae0cffe5f17ed6a840191.svg",
+  category: "fullstack",
+  technologies: ["React Native", "Node.js", "MongoDB", "Real-time Communication"],
+  demo: "https://movigo.app/",
+},
+{
+  id: 8,
+  title: "Fundación IDA",
+  description: "Digital archive platform for preserving and showcasing Argentine design heritage, featuring document management, virtual exhibitions, and research tools for historical and contemporary design collections.",
+  image: "https://cronicasdemoda.com/wp-content/uploads/2022/05/Screen-Shot-2022-05-12-at-13.19.07.png", 
+  category: "fullstack",
+  technologies: ["Drupal", "PHP", "MySQL", "Apache Solr", "IIIF"],
+  demo: "https://fundacionida.org/",
+},
 
+{
+  id: 9,
+  title: "Fauna Brava",
+  description: "WooCommerce e-commerce platform for a sustainable toys brand, with integrated virtual reality shopping experience, offering immersive product browsing and purchase options.",
+  image: "https://faunabrava.com.ar/wp-content/uploads/2022/10/Foto_tienda.jpg",
+  category: "fullstack",
+  technologies: ["WordPress", "WooCommerce", "WebVR", "Three.js", "PHP", "MySQL"],
+  demo: "https://faunabrava.com.ar/",
+}
 ];
 
 export const SKILLS = {

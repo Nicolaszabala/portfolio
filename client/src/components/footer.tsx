@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { DEVELOPER_INFO, SOCIAL_LINKS } from "@/lib/constants";
 
 export default function Footer() {
@@ -36,12 +36,6 @@ export default function Footer() {
                 className="text-muted-foreground hover:text-primary transition-colors duration-200 p-2 rounded-lg hover:bg-primary/10"
               >
                 <FaLinkedin size={24} />
-              </a>
-              <a
-                href={SOCIAL_LINKS.twitter}
-                className="text-muted-foreground hover:text-primary transition-colors duration-200 p-2 rounded-lg hover:bg-primary/10"
-              >
-                <FaTwitter size={24} />
               </a>
             </div>
           </div>
@@ -106,7 +100,7 @@ export default function Footer() {
 
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-muted-foreground font-medium">
-            © 2024 {DEVELOPER_INFO.name}. All rights reserved. Built with modern web technologies.
+            © 2025 {DEVELOPER_INFO.name}. All rights reserved. Built with modern web technologies.
           </p>
         </div>
       </div>

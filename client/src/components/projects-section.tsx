@@ -14,13 +14,18 @@ export default function ProjectsSection() {
     { id: "all", label: "All Projects" },
     { id: "fullstack", label: "Fullstack" },
     { id: "frontend", label: "Frontend" },
-    { id: "mobile", label: "Mobile" },
+    { id: "CMS", label: "CMS" },
   ];
 
   const filteredProjects =
     activeFilter === "all"
       ? PROJECTS
-      : PROJECTS.filter((project) => project.category === activeFilter);
+      : PROJECTS.filter((project) => {
+          if (Array.isArray(project.category)) {
+            return project.category.includes(activeFilter);
+          }
+          return project.category === activeFilter;
+        });
 
   const getTechColor = (tech: string) => {
     const colors: Record<string, string> = {
@@ -100,17 +105,21 @@ export default function ProjectsSection() {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                    className={`w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110 ${
+                      [6, 7].includes(project.id) ? 'bg-[#f9f9f9]' : ''
+                    }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <div className="absolute top-4 right-4 flex space-x-2">
-                    <motion.a
-                      href={project.github}
-                      whileHover={{ scale: 1.1 }}
-                      className="glass-effect p-2 rounded-full text-white hover:text-primary transition-colors"
-                    >
-                      <Github size={18} />
-                    </motion.a>
+                    {project.github && (
+                      <motion.a
+                        href={project.github}
+                        whileHover={{ scale: 1.1 }}
+                        className="glass-effect p-2 rounded-full text-white hover:text-primary transition-colors"
+                      >
+                        <Github size={18} />
+                      </motion.a>
+                    )}
                     <motion.a
                       href={project.demo}
                       whileHover={{ scale: 1.1 }}

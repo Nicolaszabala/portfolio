@@ -111,7 +111,7 @@ export const PROJECTS = [
     title: "Your Project Name",
     description: "Description of your project...",
     image: "https://your-image-url.com/image.jpg", // Use Unsplash or your own images
-    category: "fullstack", // Options: "fullstack", "frontend", "mobile"
+    category: "fullstack", // Options: "fullstack", "frontend", "CMS"
     technologies: ["React", "Node.js", "PostgreSQL"], // Your tech stack
     github: "https://github.com/yourusername/project",
     demo: "https://your-demo-url.com",
