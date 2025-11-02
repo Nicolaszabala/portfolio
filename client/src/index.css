@@ -63,6 +63,7 @@
     @apply bg-gradient-to-r from-primary via-purple-500 to-accent bg-clip-text text-transparent;
     background-size: 200% 200%;
     animation: gradient-shift 3s ease-in-out infinite;
+    will-change: background-position;
   }
 
   .gradient-text-advanced {
@@ -78,6 +79,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradient-shift 4s ease-in-out infinite;
+    will-change: background-position;
   }
 
   /* EFECTOS DE VIDRIO MEJORADOS */
@@ -135,6 +137,7 @@
   .hover-lift {
     transition: var(--transition-smooth);
     transform: translateZ(0);
+    will-change: transform;
   }
 
   .hover-lift:hover {
@@ -372,9 +375,39 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
-  
+
   .card-3d:hover {
     transform: scale(1.02);
+  }
+
+  /* Optimización de animaciones para móviles */
+  .floating-particles,
+  .discord-bg::before {
+    display: none;
+  }
+
+  /* Reducir complejidad de gradientes animados */
+  .gradient-text,
+  .gradient-text-advanced {
+    animation-duration: 6s;
+  }
+
+  /* Simplificar efectos de glow en móviles */
+  .animate-pulse-glow {
+    animation: none;
+  }
+
+  .neon-glow {
+    box-shadow: 0 0 10px var(--glow-primary);
+  }
+
+  .neon-glow:hover {
+    box-shadow: 0 0 15px var(--glow-primary);
+  }
+
+  /* Reducir efecto hover-lift en móviles */
+  .hover-lift:hover {
+    transform: translateY(-2px) scale(1.01);
   }
 }
 

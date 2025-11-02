@@ -3,8 +3,17 @@ import { ChevronDown, Download, Eye, Sparkles, Code2, Rocket, Zap, Star } from "
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { DEVELOPER_INFO, SOCIAL_LINKS } from "@/lib/constants";
+import { useEffect, useState } from "react";
 
 export default function HeroSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const scrollToProjects = () => {
     const element = document.getElementById("projects");
     if (element) {
@@ -17,27 +26,35 @@ export default function HeroSection() {
   };
 
   const downloadResume = () => {
-    console.log("Downloading resume...");
+    const link = document.createElement('a');
+    link.href = '/Nicolas_Zabala_CV.pdf';
+    link.download = 'Nicolas_Zabala_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
-  // Variantes de animación mejoradas
+  // Variantes de animación mejoradas (simplificadas para móviles)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1
+        staggerChildren: isMobile ? 0.1 : 0.2,
+        delayChildren: isMobile ? 0 : 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
+    hidden: { y: isMobile ? 20 : 50, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
+      transition: isMobile ? {
+        duration: 0.3,
+        ease: "easeOut"
+      } : {
         type: "spring",
         stiffness: 100,
         damping: 12
@@ -46,47 +63,47 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center discord-bg dark:bg-background overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center discord-bg dark:bg-background overflow-hidden pb-24 md:pb-32">
       {/* Partículas flotantes mejoradas */}
       <div className="floating-particles"></div>
       
       {/* Elementos de fondo animados mejorados */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={!isMobile ? {
             x: [0, 100, 0],
             y: [0, -100, 0],
             scale: [1, 1.2, 1],
             rotate: [0, 180, 360]
-          }}
-          transition={{ 
+          } : {}}
+          transition={{
             duration: 25,
             repeat: Infinity,
             ease: "linear"
           }}
           className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl"
         />
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={!isMobile ? {
             x: [0, -120, 0],
             y: [0, 120, 0],
             scale: [1.2, 1, 1.2],
             rotate: [360, 180, 0]
-          }}
-          transition={{ 
+          } : {}}
+          transition={{
             duration: 30,
             repeat: Infinity,
             ease: "linear"
           }}
           className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-l from-accent/20 to-primary/20 rounded-full blur-3xl"
         />
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={!isMobile ? {
             scale: [1, 1.5, 1],
             rotate: [0, 360],
             opacity: [0.3, 0.6, 0.3]
-          }}
-          transition={{ 
+          } : {}}
+          transition={{
             duration: 20,
             repeat: Infinity,
             ease: "easeInOut"
@@ -95,78 +112,80 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Elementos de código flotantes mejorados */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          animate={{ 
-            y: [-20, 30, -20],
-            rotate: [0, 10, 0],
-            scale: [1, 1.1, 1]
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-20 left-20 opacity-30"
-        >
-          <div className="glass-premium p-3 rounded-xl">
-            <Code2 className="text-primary h-8 w-8" />
-          </div>
-        </motion.div>
-        
-        <motion.div
-          animate={{ 
-            y: [30, -20, 30],
-            rotate: [0, -15, 0],
-            x: [0, 10, 0]
-          }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-40 right-32 opacity-25"
-        >
-          <div className="glass-premium p-2 rounded-lg">
-            <Sparkles className="text-accent h-6 w-6" />
-          </div>
-        </motion.div>
-        
-        <motion.div
-          animate={{ 
-            y: [-25, 25, -25],
-            rotate: [0, 20, 0],
-            scale: [1, 1.2, 1]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-40 left-32 opacity-20"
-        >
-          <div className="glass-premium p-3 rounded-xl">
-            <Rocket className="text-primary h-7 w-7" />
-          </div>
-        </motion.div>
+      {/* Elementos de código flotantes mejorados - Ocultos en móviles */}
+      {!isMobile && (
+        <div className="absolute inset-0 pointer-events-none">
+          <motion.div
+            animate={{
+              y: [-20, 30, -20],
+              rotate: [0, 10, 0],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-20 left-20 opacity-30"
+          >
+            <div className="glass-premium p-3 rounded-xl">
+              <Code2 className="text-primary h-8 w-8" />
+            </div>
+          </motion.div>
 
-        <motion.div
-          animate={{ 
-            y: [15, -35, 15],
-            rotate: [0, -10, 0],
-            x: [-5, 15, -5]
-          }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-60 right-20 opacity-25"
-        >
-          <div className="glass-premium p-2 rounded-lg">
-            <Zap className="text-accent h-5 w-5" />
-          </div>
-        </motion.div>
+          <motion.div
+            animate={{
+              y: [30, -20, 30],
+              rotate: [0, -15, 0],
+              x: [0, 10, 0]
+            }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-40 right-32 opacity-25"
+          >
+            <div className="glass-premium p-2 rounded-lg">
+              <Sparkles className="text-accent h-6 w-6" />
+            </div>
+          </motion.div>
 
-        <motion.div
-          animate={{ 
-            y: [-10, 40, -10],
-            rotate: [0, 25, 0],
-            scale: [0.8, 1.3, 0.8]
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/3 right-16 opacity-15"
-        >
-          <div className="glass-premium p-3 rounded-xl">
-            <Star className="text-primary h-6 w-6" />
-          </div>
-        </motion.div>
-      </div>
+          <motion.div
+            animate={{
+              y: [-25, 25, -25],
+              rotate: [0, 20, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-40 left-32 opacity-20"
+          >
+            <div className="glass-premium p-3 rounded-xl">
+              <Rocket className="text-primary h-7 w-7" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            animate={{
+              y: [15, -35, 15],
+              rotate: [0, -10, 0],
+              x: [-5, 15, -5]
+            }}
+            transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-60 right-20 opacity-25"
+          >
+            <div className="glass-premium p-2 rounded-lg">
+              <Zap className="text-accent h-5 w-5" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            animate={{
+              y: [-10, 40, -10],
+              rotate: [0, 25, 0],
+              scale: [0.8, 1.3, 0.8]
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/3 right-16 opacity-15"
+          >
+            <div className="glass-premium p-3 rounded-xl">
+              <Star className="text-primary h-6 w-6" />
+            </div>
+          </motion.div>
+        </div>
+      )}
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
