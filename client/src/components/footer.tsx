@@ -27,12 +27,16 @@ export default function Footer() {
             <div className="flex space-x-4">
               <a
                 href={SOCIAL_LINKS.github}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors duration-200 p-2 rounded-lg hover:bg-primary/10"
               >
                 <FaGithub size={24} />
               </a>
               <a
                 href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors duration-200 p-2 rounded-lg hover:bg-primary/10"
               >
                 <FaLinkedin size={24} />
@@ -100,7 +104,7 @@ export default function Footer() {
 
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-muted-foreground font-medium">
-            © 2025 {DEVELOPER_INFO.name}. All rights reserved. Built with modern web technologies.
+            © 2026 {DEVELOPER_INFO.name}. All rights reserved. Built with modern web technologies.
           </p>
         </div>
       </div>

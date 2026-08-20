@@ -132,7 +132,7 @@ export const SKILLS = {
     // Add more skills...
   ],
   tools: {
-    development: ["VS Code", "Git & GitHub", "Terminal", "Postman"],
+    development: ["PHP Unit", "Git & GitHub", "Sonarqube", "Postman"],
     design: ["Figma", "Adobe XD", "Sketch", "Photoshop"],
     // Update with your tools...
   },

@@ -14,8 +14,8 @@ export default function HeroSection() {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-  const scrollToProjects = () => {
-    const element = document.getElementById("projects");
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
     if (element) {
       const offsetTop = element.offsetTop - 80;
       window.scrollTo({
@@ -243,7 +243,7 @@ export default function HeroSection() {
             className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8"
           >
             <Button
-              onClick={scrollToProjects}
+              onClick={() => scrollToSection("latest")}
               size="lg"
               className="group relative bg-primary hover:bg-primary/90 text-primary-foreground shadow-2xl hover:shadow-primary/25 neon-glow hover-lift magnetic-btn focus-ring font-bold px-10 py-6 text-lg rounded-2xl overflow-hidden"
             >
@@ -281,6 +281,8 @@ export default function HeroSection() {
             {/* SOLO GITHUB Y LINKEDIN */}
             <motion.a
               href={SOCIAL_LINKS.github}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ 
                 scale: 1.3, 
                 rotate: 10,
@@ -294,6 +296,8 @@ export default function HeroSection() {
             
             <motion.a
               href={SOCIAL_LINKS.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ 
                 scale: 1.3, 
                 rotate: -10,
@@ -319,7 +323,7 @@ export default function HeroSection() {
                 ease: "easeInOut" 
               }}
               className="inline-flex flex-col items-center space-y-2 glass-premium p-4 rounded-2xl hover-lift cursor-pointer"
-              onClick={scrollToProjects}
+              onClick={() => scrollToSection("latest")}
             >
               <span className="text-sm font-medium text-foreground/60">Scroll to explore</span>
               <ChevronDown className="text-foreground/40 h-6 w-6" />

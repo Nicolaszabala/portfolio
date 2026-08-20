@@ -114,6 +114,8 @@ export default function ProjectsSection() {
                     {project.github && (
                       <motion.a
                         href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         whileHover={{ scale: 1.1 }}
                         className="glass-effect p-2 rounded-full text-white hover:text-primary transition-colors"
                       >
@@ -122,6 +124,8 @@ export default function ProjectsSection() {
                     )}
                     <motion.a
                       href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.1 }}
                       className="glass-effect p-2 rounded-full text-white hover:text-primary transition-colors"
                     >

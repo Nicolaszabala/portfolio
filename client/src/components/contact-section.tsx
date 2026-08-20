@@ -13,7 +13,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Mail, Phone, MapPin, Clock, Send, Loader2 } from "lucide-react";
-import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { DEVELOPER_INFO, SOCIAL_LINKS } from "@/lib/constants";
 
 const contactFormSchema = z.object({
@@ -162,6 +162,8 @@ export default function ContactSection() {
               <div className="flex space-x-4">
                 <motion.a
                   href={SOCIAL_LINKS.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   className="w-14 h-14 bg-primary text-primary-foreground rounded-xl flex items-center justify-center hover:bg-primary/90 transition-colors duration-200 neon-glow"
                 >
@@ -169,17 +171,12 @@ export default function ContactSection() {
                 </motion.a>
                 <motion.a
                   href={SOCIAL_LINKS.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, rotate: -5 }}
                   className="w-14 h-14 bg-foreground text-background rounded-xl flex items-center justify-center hover:bg-foreground/90 transition-colors duration-200 neon-glow"
                 >
                   <FaGithub size={24} />
-                </motion.a>
-                <motion.a
-                  href={SOCIAL_LINKS.twitter}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-14 h-14 bg-accent text-accent-foreground rounded-xl flex items-center justify-center hover:bg-accent/90 transition-colors duration-200 neon-glow"
-                >
-                  <FaTwitter size={24} />
                 </motion.a>
               </div>
             </motion.div>

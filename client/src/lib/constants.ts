@@ -2,15 +2,15 @@ export const DEVELOPER_INFO = {
   name: "Nicolás Zabala",
   title: "Fullstack Developer",
   tagline: "I craft exceptional digital experiences with CMS and modern technologies. Passionate about clean code, innovative solutions, and building products that make a difference.",
-  story: "With over 6 years of experience in fullstack development, I've had the privilege of working with startups and established companies to bring innovative ideas to life. My passion lies in creating seamless user experiences backed by robust, scalable architectures.",
+  story: "With over 7 years of experience in fullstack development, I've had the privilege of working with startups and established companies to bring innovative ideas to life. My passion lies in creating seamless user experiences backed by robust, scalable architectures.",
   email: "nznicolaszabala@gmail.com",
   phone: "+34 634 443 713",
   location: "Galicia, Spain",
 };
 
 export const STATS = {
-  projects: "50+",
-  experience: "5+",
+  projects: "30+",
+  experience: "7+",
   clients: "25+",
   technologies: "10+",
 };
@@ -85,7 +85,7 @@ export const PROJECTS = [
   id: 8,
   title: "Fundación IDA",
   description: "Digital archive platform for preserving and showcasing Argentine design heritage, featuring document management, virtual exhibitions, and research tools for historical and contemporary design collections.",
-  image: "https://cronicasdemoda.com/wp-content/uploads/2022/05/Screen-Shot-2022-05-12-at-13.19.07.png", 
+  image: "/work/fundacion-ida.webp",
   category: "fullstack",
   technologies: ["Drupal", "PHP", "MySQL", "Apache Solr", "IIIF"],
   demo: "https://fundacionida.org/",
@@ -95,7 +95,7 @@ export const PROJECTS = [
   id: 9,
   title: "Fauna Brava",
   description: "WooCommerce e-commerce platform for a sustainable toys brand, with integrated virtual reality shopping experience, offering immersive product browsing and purchase options.",
-  image: "https://faunabrava.com.ar/wp-content/uploads/2022/10/Foto_tienda.jpg",
+  image: "/work/fauna-brava.jpg",
   category: "fullstack",
   technologies: ["WordPress", "WooCommerce", "WebVR", "Three.js", "PHP", "MySQL"],
   demo: "https://faunabrava.com.ar/",
@@ -126,7 +126,7 @@ export const SKILLS = {
     },
   ],
   tools: {
-    development: ["VS Code", "Git & GitHub", "Terminal", "Postman"],
+    development: ["PHP Unit", "Git & GitHub", "Sonarqube", "Postman"],
     design: ["Figma", "Adobe XD", "Sketch", "Photoshop"],
     devops: ["Docker", "AWS", "Netlify", "Vercel"],
     collaboration: ["Jira", "Slack", "Notion", "Clickup"],
@@ -138,6 +138,87 @@ export const SKILLS = {
     { name: "Professional Front-end Developer - Universidad Tecnológica Nacional", year: "2021" },
   ],
 };
+
+export const LATEST_PROJECTS = [
+  {
+    id: "boost-reporting",
+    title: "Boost Reporting",
+    subtitle: "AI reporting platform for a CRO agency",
+    period: "2026",
+    context: "Internal product · Boost",
+    summary:
+      "A platform that turns scattered experiment evidence into a client-ready CRO report. The PM picks a client and a period; the system gathers the sources, retrieves the relevant context, writes the narrative with an LLM and ships a slide deck plus a downloadable PDF.",
+    highlights: [
+      {
+        icon: "Layers",
+        title: "Drupal as the DXP layer",
+        text: "Drupal 11 owns identity and governance through a custom API module: one source of truth for accounts, roles and client access, consumed by the Next.js app server-to-server.",
+      },
+      {
+        icon: "Workflow",
+        title: "Python orchestrator",
+        text: "A FastAPI service owns the heavy work — parallel source ingestion, prompt assembly, LLM calls, validation and audit — so the web app stays thin and deployable on the edge.",
+      },
+      {
+        icon: "Database",
+        title: "RAG over the agency's own evidence",
+        text: "Confluence, experiment platform and GA4 data are chunked and embedded into PostgreSQL + pgvector, then retrieved per client, vertical and period before the model writes a single line.",
+      },
+      {
+        icon: "ShieldCheck",
+        title: "The LLM never invents a number",
+        text: "Dates, uplift, sessions and conversions are copied deterministically from the source APIs after generation. Validation and audit passes gate the output, with a repair prompt as fallback.",
+      },
+      {
+        icon: "RefreshCw",
+        title: "Reports that build on each other",
+        text: "Every experiment carries a fingerprint, so a new report reuses what was already written and refreshes only the figures that actually changed.",
+      },
+      {
+        icon: "Presentation",
+        title: "Deck-grade output",
+        text: "Generation runs as an async job with polling to survive minute-long model runs, and lands as an editable report, a presentation deck and a PDF with full parity.",
+      },
+    ],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Drupal 11",
+      "FastAPI",
+      "Python",
+      "PostgreSQL",
+      "pgvector",
+      "Prisma",
+      "Claude",
+      "RAG",
+      "GA4 API",
+      "Vercel",
+    ],
+    screenshots: [
+      {
+        src: "/work/boost-reporting-wizard.png",
+        caption: "Report wizard — the consultant chooses which experiments enter the report before the AI writes it.",
+      },
+      {
+        src: "/work/boost-reporting-reuse.png",
+        caption: "Reuse detection — prior write-ups are kept and only the figures that changed are refreshed.",
+      },
+      {
+        src: "/work/boost-reporting-slide-test.png",
+        caption: "Generated deck — one slide per experiment, with metrics copied straight from the source API.",
+      },
+      {
+        src: "/work/boost-reporting-slide-variant.png",
+        caption: "Control vs. variant, verdict and estimated economic impact.",
+      },
+      {
+        src: "/work/boost-reporting-slide-recap.png",
+        caption: "Project recap — learnings and the period's top performers.",
+      },
+    ],
+    private: true,
+  },
+];
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/Nicolaszabala",
