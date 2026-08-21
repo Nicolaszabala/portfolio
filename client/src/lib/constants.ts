@@ -84,7 +84,7 @@ export const PROJECTS = [
 {
   id: 8,
   title: "Fundación IDA",
-  description: "Digital archive platform for preserving and showcasing Argentine design heritage, featuring document management, virtual exhibitions, and research tools for historical and contemporary design collections.",
+  description: "Digital archive platform for preserving and showcasing Argentine design heritage, featuring document management, virtual exhibitions, and research tools for design collections.",
   image: "/work/fundacion-ida.webp",
   category: "fullstack",
   technologies: ["Drupal", "PHP", "MySQL", "Apache Solr", "IIIF"],
@@ -112,7 +112,7 @@ export const SKILLS = {
     {
       name: "Backend Development",
       level: 90,
-      technologies: ["Node.js", "Express", "PHP", "Django"],
+      technologies: ["Node.js", "Symfony", "PHP", "Django"],
     },
     {
       name: "Database & Cloud",
@@ -126,15 +126,16 @@ export const SKILLS = {
     },
   ],
   tools: {
-    development: ["PHP Unit", "Git & GitHub", "Sonarqube", "Postman"],
+    development: ["PHP Unit", "Gitlab & GitHub", "Sonarqube", "Testlink", "Redmine", "Postman"],
     design: ["Figma", "Adobe XD", "Sketch", "Photoshop"],
     devops: ["Docker", "AWS", "Netlify", "Vercel"],
     collaboration: ["Jira", "Slack", "Notion", "Clickup"],
   },
   certifications: [
     { name: "Computer Science Degree - Universidad Siglo 21", year: "2024" },
+    { name: "Drupal 10 Developer - Forcontu", year: "2024" },
     { name: "Database Programing (.NET framework) - CIPSA Barcelona", year: "2023" },
-     { name: "Javascript Algorithms and Data Structures - Free CodeCamp", year: "2022" },
+     { name: "Javascript Algorithms and Data Structures - FreeCodeCamp", year: "2022" },
     { name: "Professional Front-end Developer - Universidad Tecnológica Nacional", year: "2021" },
   ],
 };
