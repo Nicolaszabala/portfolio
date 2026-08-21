@@ -13,6 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { LATEST_PROJECTS } from "@/lib/constants";
+import { useTheme } from "@/components/theme-provider";
 
 const ICONS: Record<string, typeof Layers> = {
   Layers,
@@ -29,14 +30,18 @@ function ProjectShowcase({ screenshots }: { screenshots: Screenshot[] }) {
   const [active, setActive] = useState(0);
   const [zoomed, setZoomed] = useState(false);
   const current = screenshots[active];
+  const { theme } = useTheme();
+  const isNewspaper = theme === "newspaper";
 
   return (
     <div className="space-y-4">
       <motion.button
         type="button"
         onClick={() => setZoomed(true)}
-        whileHover={{ scale: 1.01 }}
-        className="group relative block w-full overflow-hidden rounded-2xl border border-border bg-[#0b0b12] text-left hover:border-primary/40 transition-colors"
+        whileHover={isNewspaper ? {} : { scale: 1.01 }}
+        className={`group relative block w-full overflow-hidden rounded-2xl border border-border text-left hover:border-primary/40 transition-colors ${
+          isNewspaper ? "bg-muted" : "bg-[#0b0b12]"
+        }`}
       >
         <img
           key={current.src}
@@ -84,7 +89,9 @@ function ProjectShowcase({ screenshots }: { screenshots: Screenshot[] }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setZoomed(false)}
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4 sm:p-8 cursor-zoom-out"
+            className={`fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-8 cursor-zoom-out ${
+              isNewspaper ? "bg-background/95" : "bg-black/90"
+            }`}
           >
             <button
               type="button"

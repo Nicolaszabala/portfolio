@@ -4,11 +4,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 import { PROJECTS } from "@/lib/constants";
+import { useTheme } from "@/components/theme-provider";
 
 export default function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState("all");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { theme } = useTheme();
+  const isNewspaper = theme === "newspaper";
 
   const filters = [
     { id: "all", label: "All Projects" },
@@ -116,7 +119,7 @@ export default function ProjectsSection() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={isNewspaper ? {} : { scale: 1.1 }}
                         className="glass-effect p-2 rounded-full text-white hover:text-primary transition-colors"
                       >
                         <Github size={18} />
@@ -126,7 +129,7 @@ export default function ProjectsSection() {
                       href={project.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={isNewspaper ? {} : { scale: 1.1 }}
                       className="glass-effect p-2 rounded-full text-white hover:text-primary transition-colors"
                     >
                       <ExternalLink size={18} />

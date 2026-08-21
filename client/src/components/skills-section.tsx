@@ -3,10 +3,13 @@ import { motion, useInView } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Code, Palette, Cloud, Users, Award } from "lucide-react";
 import { SKILLS } from "@/lib/constants";
+import { useTheme } from "@/components/theme-provider";
 
 export default function SkillsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { theme } = useTheme();
+  const isNewspaper = theme === "newspaper";
 
   const getIconForCategory = (category: string) => {
     const icons: Record<string, JSX.Element> = {
@@ -71,8 +74,11 @@ export default function SkillsSection() {
                       animate={
                         isInView ? { width: `${skill.level}%` } : { width: 0 }
                       }
-                      transition={{ duration: 1.5, delay: 0.5 + index * 0.1 }}
-                      className={`h-4 rounded-full shadow-lg ${
+                      transition={{
+                        duration: isNewspaper ? 0 : 1.5,
+                        delay: isNewspaper ? 0 : 0.5 + index * 0.1,
+                      }}
+                      className={`h-4 rounded-full shadow-lg bg-primary ${
                         skill.name === "Frontend Development"
                           ? "bg-gradient-to-r from-primary via-purple-500 to-primary neon-glow"
                           : skill.name === "Backend Development"

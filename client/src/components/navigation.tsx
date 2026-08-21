@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import { Menu, X, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { ModeToggle } from "@/components/mode-toggle";
+import { useTheme } from "@/components/theme-provider";
 import { DEVELOPER_INFO } from "@/lib/constants";
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme } = useTheme();
+  const isNewspaper = theme === "newspaper";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +26,7 @@ export default function Navigation() {
       const offsetTop = element.offsetTop - 80;
       window.scrollTo({
         top: offsetTop,
-        behavior: "smooth",
+        behavior: isNewspaper ? "auto" : "smooth",
       });
     }
     setIsMobileMenuOpen(false);
@@ -67,9 +70,11 @@ export default function Navigation() {
                 className="text-foreground/80 hover:text-primary transition-all duration-200 font-medium relative group"
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-200 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary bg-gradient-to-r from-primary to-accent transition-all duration-200 group-hover:w-full"></span>
               </button>
             ))}
+            <span className="h-6 w-px bg-border/70" aria-hidden="true"></span>
+            <ModeToggle />
           </div>
 
           {/* Mobile Menu Button and Theme Toggle */}

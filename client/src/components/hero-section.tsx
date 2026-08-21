@@ -2,11 +2,14 @@ import { motion } from "framer-motion";
 import { ChevronDown, Download, Eye, Sparkles, Code2, Rocket, Zap, Star } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/components/theme-provider";
 import { DEVELOPER_INFO, SOCIAL_LINKS } from "@/lib/constants";
 import { useEffect, useState } from "react";
 
 export default function HeroSection() {
   const [isMobile, setIsMobile] = useState(false);
+  const { theme } = useTheme();
+  const isNewspaper = theme === "newspaper";
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -20,7 +23,7 @@ export default function HeroSection() {
       const offsetTop = element.offsetTop - 80;
       window.scrollTo({
         top: offsetTop,
-        behavior: "smooth",
+        behavior: isNewspaper ? "auto" : "smooth",
       });
     }
   };
@@ -63,7 +66,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center discord-bg dark:bg-background overflow-hidden pb-24 md:pb-32">
+    <section className="relative min-h-screen flex items-center justify-center discord-bg dark:bg-background overflow-hidden pt-28 md:pt-32 pb-24 md:pb-32">
       {/* Partículas flotantes mejoradas */}
       <div className="floating-particles"></div>
       
@@ -112,8 +115,8 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Elementos de código flotantes mejorados - Ocultos en móviles */}
-      {!isMobile && (
+      {/* Elementos de código flotantes mejorados - Ocultos en móviles y en modo periódico */}
+      {!isMobile && !isNewspaper && (
         <div className="absolute inset-0 pointer-events-none">
           <motion.div
             animate={{
@@ -197,8 +200,8 @@ export default function HeroSection() {
           <div className="space-y-6">
             <motion.div
               variants={itemVariants}
-              whileHover={{ scale: 1.05, rotate: [0, -1, 1, 0] }}
-              className="inline-flex items-center space-x-3 glass-premium px-6 py-3 rounded-full border border-primary/20 hover-lift animate-pulse-glow"
+              whileHover={isNewspaper ? {} : { scale: 1.05, rotate: [0, -1, 1, 0] }}
+              className="inline-flex items-center space-x-3 mb-6 glass-premium px-6 py-3 rounded-full border border-primary/20 hover-lift animate-pulse-glow"
             >
               <motion.div
                 animate={{ rotate: 360 }}
@@ -249,8 +252,8 @@ export default function HeroSection() {
             >
               <motion.div
                 className="flex items-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={isNewspaper ? {} : { scale: 1.05 }}
+                whileTap={isNewspaper ? {} : { scale: 0.95 }}
               >
                 <Eye className="mr-3 h-6 w-6 group-hover:rotate-12 transition-transform" />
                 View My Work
@@ -265,8 +268,8 @@ export default function HeroSection() {
             >
               <motion.div
                 className="flex items-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={isNewspaper ? {} : { scale: 1.05 }}
+                whileTap={isNewspaper ? {} : { scale: 0.95 }}
               >
                 <Download className="mr-3 h-6 w-6 group-hover:translate-y-1 transition-transform" />
                 Download Resume
@@ -283,12 +286,12 @@ export default function HeroSection() {
               href={SOCIAL_LINKS.github}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ 
+              whileHover={isNewspaper ? {} : { 
                 scale: 1.3, 
                 rotate: 10,
                 y: -5
               }}
-              whileTap={{ scale: 0.9 }}
+              whileTap={isNewspaper ? {} : { scale: 0.9 }}
               className="text-foreground/60 hover:text-gray-400 transition-all duration-300 p-4 rounded-2xl glass-premium hover-lift focus-ring"
             >
               <FaGithub size={32} />
@@ -298,12 +301,12 @@ export default function HeroSection() {
               href={SOCIAL_LINKS.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ 
+              whileHover={isNewspaper ? {} : { 
                 scale: 1.3, 
                 rotate: -10,
                 y: -5
               }}
-              whileTap={{ scale: 0.9 }}
+              whileTap={isNewspaper ? {} : { scale: 0.9 }}
               className="text-foreground/60 hover:text-blue-400 transition-all duration-300 p-4 rounded-2xl glass-premium hover-lift focus-ring"
             >
               <FaLinkedin size={32} />

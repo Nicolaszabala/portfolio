@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-type Theme = "dark" | "light";
+type Theme = "dark" | "newspaper";
+
+const THEMES: Theme[] = ["dark", "newspaper"];
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -26,13 +28,15 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    const stored = localStorage.getItem(storageKey);
+    /* "light" quedó guardado en navegadores del tema anterior */
+    return THEMES.includes(stored as Theme) ? (stored as Theme) : defaultTheme;
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;
-    root.classList.remove("light", "dark");
+    root.classList.remove("light", "dark", "newspaper");
     root.classList.add(theme);
   }, [theme]);
 

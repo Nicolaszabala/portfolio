@@ -25,6 +25,38 @@
   --ring: 262 100% 67%;
   --radius: 0.75rem;
 }
+
+/* MODO PERIODICO: paleta de papel y tinta */
+.newspaper {
+  --background: 40 33% 97%;
+  --foreground: 0 0% 8%;
+  --muted: 40 14% 92%;
+  --muted-foreground: 0 0% 38%;
+  --popover: 40 20% 99%;
+  --popover-foreground: 0 0% 8%;
+  --card: 40 20% 99%;
+  --card-foreground: 0 0% 8%;
+  --border: 30 8% 78%;
+  --input: 30 8% 70%;
+  --primary: 0 0% 8%;
+  --primary-foreground: 40 33% 97%;
+  --secondary: 40 14% 92%;
+  --secondary-foreground: 0 0% 8%;
+  --accent: 355 65% 34%;
+  --accent-foreground: 40 33% 97%;
+  --destructive: 355 65% 34%;
+  --destructive-foreground: 40 33% 97%;
+  --ring: 0 0% 8%;
+  --radius: 0rem;
+
+  /* Neutraliza los efectos "premium" que consumen estas variables */
+  --backdrop-blur: none;
+  --glow-primary: transparent;
+  --shadow-elevated: none;
+  --gradient-mesh: hsl(var(--background));
+  --transition-smooth: color 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease;
+}
 @layer base {
   * {
     @apply border-border;
@@ -433,4 +465,204 @@
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+/* ==========================================================================
+   MODO PERIODICO
+   Capa de overrides. Va al final del archivo a proposito: gana por orden y por
+   especificidad (.newspaper + selector) sin necesidad de !important.
+   ========================================================================== */
+
+/* --- Tipografia ---------------------------------------------------------- */
+.newspaper body {
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+
+.newspaper h1,
+.newspaper h2,
+.newspaper h3,
+.newspaper h4,
+.newspaper .gradient-text,
+.newspaper .gradient-text-advanced {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.015em;
+}
+
+/* Los titulares de imprenta no llegan a 900 */
+.newspaper h1,
+.newspaper h2,
+.newspaper h3 {
+  font-weight: 700;
+}
+
+/* Filete bajo cada titulo de seccion */
+.newspaper section h2 {
+  padding-bottom: 0.35em;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+/* Volantas, navegacion, botones y formularios en sans de diario */
+.newspaper nav button,
+.newspaper button,
+.newspaper input,
+.newspaper textarea,
+.newspaper label,
+.newspaper [class*="uppercase"] {
+  font-family: 'Libre Franklin', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.newspaper nav button {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+}
+
+.newspaper .magnetic-btn,
+.newspaper button[type="submit"] {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* El logotipo hace de cabecera del diario */
+.newspaper nav .gradient-text {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 900;
+}
+
+.newspaper p {
+  line-height: 1.65;
+}
+
+/* --- Se apagan los efectos ---------------------------------------------- */
+.newspaper .glass-effect,
+.newspaper .glass-premium {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.newspaper .neon-glow,
+.newspaper .neon-glow:hover {
+  box-shadow: none;
+}
+
+.newspaper .hover-lift:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.newspaper .magnetic-btn::before {
+  display: none;
+}
+
+.newspaper .gradient-text,
+.newspaper .gradient-text-advanced {
+  background: none;
+  color: hsl(var(--foreground));
+  -webkit-text-fill-color: currentColor;
+  animation: none;
+}
+
+.newspaper .discord-bg::before,
+.newspaper .floating-particles {
+  display: none;
+}
+
+/* Gradientes de Tailwind: se aplanan. Donde el elemento debe seguir
+   visible, el componente lleva ademas un bg-* solido que queda a la vista. */
+.newspaper [class*="bg-gradient-to"] {
+  background-image: none;
+}
+
+/* Orbes y halos decorativos */
+.newspaper .blur-xl,
+.newspaper .blur-2xl,
+.newspaper .blur-3xl {
+  display: none;
+}
+
+.newspaper .backdrop-blur-md {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Nada es blanco sobre papel */
+.newspaper .text-white {
+  color: hsl(var(--foreground));
+}
+
+/* --- Formas de imprenta: todo recto y sin sombra ------------------------ */
+.newspaper [class*="rounded"] {
+  border-radius: 0;
+}
+
+.newspaper [class*="shadow"] {
+  box-shadow: none;
+}
+
+/* --- Fotos: escala de grises con marco de filete ------------------------ */
+.newspaper img {
+  filter: grayscale(1) contrast(1.05);
+  border: 1px solid hsl(var(--border));
+}
+
+/* --- Formularios -------------------------------------------------------- */
+.newspaper input,
+.newspaper textarea {
+  background: hsl(var(--card));
+  border-color: hsl(var(--input));
+}
+
+/* --- El diario no se mueve ---------------------------------------------- */
+/* Sin animaciones ni transiciones: incluye el spinner del formulario, que
+   igual anuncia el estado con el texto "Sending...". Las animaciones de
+   framer-motion se cortan aparte, con MotionGlobalConfig en App.tsx. */
+.newspaper *,
+.newspaper *::before,
+.newspaper *::after {
+  animation: none;
+  transition: none;
+}
+
+/* Nada crece ni se desplaza al pasar el mouse, al enfocar ni al presionar.
+   Los gestos de framer-motion (whileHover/whileTap) se anulan aparte, en cada
+   componente: al ser estilos inline el CSS no puede pisarlos sin !important. */
+.newspaper *:hover,
+.newspaper *:focus,
+.newspaper *:focus-visible,
+.newspaper *:focus-within,
+.newspaper *:active,
+.newspaper .group:hover *,
+.newspaper .group:focus-within * {
+  transform: none;
+}
+
+/* --- Colores literales que no sobreviven al papel ----------------------- */
+/* Texto recortado sobre gradiente: sin gradiente quedaria invisible */
+.newspaper .text-transparent {
+  color: hsl(var(--foreground));
+  -webkit-text-fill-color: currentColor;
+}
+
+.newspaper .bg-green-500 {
+  background-color: hsl(var(--foreground));
+}
+
+.newspaper .bg-\[\#f9f9f9\] {
+  background-color: hsl(var(--card));
+}
+
+.newspaper .hover\:text-gray-400:hover,
+.newspaper .hover\:text-blue-400:hover {
+  color: hsl(var(--accent));
+}
+
+/* Tampoco se desplaza con animacion */
+.newspaper {
+  scroll-behavior: auto;
 }

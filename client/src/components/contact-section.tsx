@@ -15,6 +15,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { Mail, Phone, MapPin, Clock, Send, Loader2 } from "lucide-react";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { DEVELOPER_INFO, SOCIAL_LINKS } from "@/lib/constants";
+import { useTheme } from "@/components/theme-provider";
 
 const contactFormSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -28,6 +29,8 @@ const contactFormSchema = z.object({
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export default function ContactSection() {
+  const { theme } = useTheme();
+  const isNewspaper = theme === "newspaper";
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { toast } = useToast();
@@ -164,7 +167,7 @@ export default function ContactSection() {
                   href={SOCIAL_LINKS.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileHover={isNewspaper ? {} : { scale: 1.1, rotate: 5 }}
                   className="w-14 h-14 bg-primary text-primary-foreground rounded-xl flex items-center justify-center hover:bg-primary/90 transition-colors duration-200 neon-glow"
                 >
                   <FaLinkedin size={24} />
@@ -173,7 +176,7 @@ export default function ContactSection() {
                   href={SOCIAL_LINKS.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  whileHover={isNewspaper ? {} : { scale: 1.1, rotate: -5 }}
                   className="w-14 h-14 bg-foreground text-background rounded-xl flex items-center justify-center hover:bg-foreground/90 transition-colors duration-200 neon-glow"
                 >
                   <FaGithub size={24} />
